@@ -1,0 +1,43 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale-1.0">
+    <meta http-equiv="x-UA-Compatible" content="ie-edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Bookmark</title>
+</head>
+
+<body  style="background-color:lightsalmon;">
+    <div class="container">
+        <table class="table table-stripped">
+            <thead>
+                <tr>
+                    <th>Title </th>
+                    <th>Link </th>
+                </tr>
+            </thead>
+            <tbody id="data">
+                <button><a href ="index.html">Back</a></button>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        fetch("https://comp4537-lab-5.com/termproject/").then(
+            res => {
+                res.json().then(
+                    data => {
+                        console.log(data);
+                        if (data.length > 0) {
+                            var temp = "";
+                            data.forEach((u) => {
+                                temp += "<tr>";
+                                temp += "<td>" + u.title+"</td>";
+                                temp += "<td>" + u.link+"</td></tr>";
+                            })
+
+                            document.getElementById("data").innerHTML = temp;
+                        }
+                    })
+            })
+    </script>
