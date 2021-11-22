@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WriteDB</title>
+</head>
+<body>
+    <h1 id="header">Statistics</h1>
+    <br>
+    <p id="tableHeaders">Method &emsp; Endpoint &emsp; Requests</p>
+    <p id="getRequests"></p>
+    <p id="postRequests"></p>
+    
+</body>
+</html>
+
+<script>
+
+    let passwordField = prompt("Please enter the password");
+    if (passwordField != '1234abcd') {
+        window.alert("Wrong password");
+        document.getElementsByTagName("body")[0].style.display = "none";
+    }
+    window.load(passwordField);
+    const xhttp = new XMLHttpRequest();
+    const endPointRoot = "https://comp4537-lab-5.com/nodemysqlstats/";
+    function stats() {
+        const url = endPointRoot;
+        xhttp.open("GET", url , true);
+        xhttp.send();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 & this.status == 200) {
+                const obj = JSON.parse(this.responseText);
+                console.log(obj);
+
+                let i = 0;
+                
+                document.getElementById("getRequests").innerHTML = obj[i].Method + "    /termproject/stats    " + obj[i].Requests;
+                i++;
+                document.getElementById("getRequests").innerHTML = obj[i].Method + "    /termproject/stats    " + obj[i].Requests;
+            }
+        }
+       
+    };
+    window.onload = stats;
+</script>
