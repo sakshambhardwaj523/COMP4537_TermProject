@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 
 <body style="background-color:lightsalmon;">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-
-    <h1 style="font-style:italic; color: greenyellow">Search Recipes</h1>
-    <h3>Enter Ingredient or name and click search!</h3>
-    <input id="search"><button onclick="getrecepe(document.getElementById('search').value)">Search</button>
-    <div id="output"></div>
-    <a href="" id="sourceLink"></a>
-
+    <div class="container">
+        <h1 style="font-style:italic; color: greenyellow">Search Recipes</h1>
+        <h3>Enter Ingredient or name and click search!</h3>
+        <input id="search"><button onclick="getrecepe(document.getElementById('search').value)">Search</button>
+        <div id="output"></div>
+        <a href="" id="sourceLink"></a>
     <script>
         function getsource(id) {
             $.ajax({
@@ -29,10 +29,10 @@
                 }
             });
         }
-
     </script>
     <br><br>
     <button><a href="bookmarkDB.html">Bookmarks</a></button>
     <button><a href="admin.html">Admin</a></button>
     <button><a href="doc.html">Documentation</a></button>
+    </div>
 </body>
