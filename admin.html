@@ -30,11 +30,11 @@
 
 
     <script>
-let passwordField = prompt("Please enter the password");
-    if (passwordField != '1234abcd') {
-        window.alert("Wrong password");
-        document.getElementsByTagName("body")[0].style.display = "none";
-    }
+        let passwordField = prompt("Please enter the password");
+        if (passwordField != '1234abcd') {
+            window.alert("Wrong password");
+            document.getElementsByTagName("body")[0].style.display = "none";
+        }
         fetch("https://comp4537-lab-5.com/termprojectadmin/").then(
             res => {
                 res.json().then(
