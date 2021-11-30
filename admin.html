@@ -1,48 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WriteDB</title>
+    <meta name="viewport" content="width-device-width, initial-scale-1.0">
+    <meta http-equiv="x-UA-Compatible" content="ie-edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Admin</title>
+    <button style="  background-color: greenyellow; border: none; color: white; width: 100px; margin: 4px 2px"><a href="index.html">Back</a></button>
+    <h1 style="font-style:italic; color: greenyellow;text-align: center">Admin Page Table</h1>
+
 </head>
-<body>
-    <h1 id="header">Statistics</h1>
+
+<body style="background-color:lightsalmon;">
     <br>
-    <p id="tableHeaders">Method &emsp; Endpoint &emsp; Requests</p>
-    <p id="getRequests"></p>
-    <p id="postRequests"></p>
-    
-</body>
-</html>
+    <table class="table table-stripped">
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>EndPoint</th>
+                <th>Requests</th>
+            </tr>
+        </thead>
+        <tbody id="data">
+        </tbody>
+    </table>
 
-<script>
 
-    let passwordField = prompt("Please enter the password");
-    if (passwordField != '1234abcd') {
-        window.alert("Wrong password");
-        document.getElementsByTagName("body")[0].style.display = "none";
-    }
-    window.load(passwordField);
-    const xhttp = new XMLHttpRequest();
-    const endPointRoot = "https://comp4537-lab-5.com/nodemysqlstats/";
-    function stats() {
-        const url = endPointRoot;
-        xhttp.open("GET", url , true);
-        xhttp.send();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 & this.status == 200) {
-                const obj = JSON.parse(this.responseText);
-                console.log(obj);
 
-                let i = 0;
-                
-                document.getElementById("getRequests").innerHTML = obj[i].Method + "    /termproject/stats    " + obj[i].Requests;
-                i++;
-                document.getElementById("getRequests").innerHTML = obj[i].Method + "    /termproject/stats    " + obj[i].Requests;
-            }
+    <script>
+        fetch("https://comp4537-lab-5.com/termprojectadmin/").then(
+            res => {
+                res.json().then(
+                    data => {
+                        console.log(data);
+                        if (data.length > 0) {
+                            var temp = "";
+                            data.forEach((u) => {
+                                temp += "<tr>";
+                                temp += "<td>" + u.Method + "</td>";
+                                temp += "<td>" + u.Endpoint + "</td>";
+                                temp += "<td>" + u.Requests + "</td></tr>";
+                            })
+
+                            document.getElementById("data").innerHTML = temp;
+                        }
+                    })
+            })
+        //clear txt
+        function reset() {
+            document.getElementById("res").innerHTML = "";
         }
-       
-    };
-    window.onload = stats;
-</script>
+    </script>
